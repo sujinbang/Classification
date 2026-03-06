@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home</title>
+</head>
+
+<body>
+    <p>분류할 쓰레기를 입력해주세요</p>
+    <input type="text" id="wasteInput"></input>
+    <button onclick="classify()">분류</button>
+    <p id="resultText"></p>
+
+    <script>
+        function classify() {
+            // input에서 데이터를 가져옵니다.
+            const inputData = document.getElementById('wasteInput').value;
+
+            // 서버의 /classify 경로에 POST 요청으로 데이터를 보냅니다.
+            fetch('/classify', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ my_test_data: inputData })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // 결과를 화면에 표시합니다.
+                    document.getElementById('resultText').innerText = "예측 결과: " + data.result;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('resultText').innerText = "오류가 발생했습니다.";
+                });
+        }
+    </script>
+</body>
+
+</html>
