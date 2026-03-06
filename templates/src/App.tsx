@@ -68,7 +68,7 @@ export default function App() {
 
       {/* Top Logo */}
       <div className="absolute top-0 left-0 right-0 z-40 flex justify-center pt-3">
-        <span className="font-script text-2xl text-white drop-shadow-md">emo</span>
+        <span className="font-script text-2xl text-white drop-shadow-md">Play</span>
       </div>
 
       {/* Main Content */}
