@@ -24,12 +24,17 @@
 ### 1. 백엔드 설정 (Python)
 필수 라이브러리를 설치하고 서버를 실행합니다.
 ```bash
-# 가상환경 생성 및 활성화
-python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
+# 아나콘다 가상환경 생성 및 활성화
+conda create -n venv python=3.10
+conda activate venv
 
 # 필수 패키지 설치
 pip install flask pandas scikit-learn openpyxl torch transformers langchain langchain-community chromadb sentence-transformers
+
+# cuda 13.0d으로 설치
+pip3 install torch torchvision --index-url https://download.pytorch.org/whl/cu130
+
+pip install transformers accelerate bitsandbytes sentence-transformers langchain-huggingface langchain-community langchain-text-splitters pypdf chromadb nvitop
 ```
 *참고: `LLM.py` 내의 `HUGGINGFACEHUB_API_TOKEN` 설정이 필요할 수 있습니다.*
 
