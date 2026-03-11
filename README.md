@@ -29,11 +29,12 @@ conda create -n venv python=3.10
 conda activate venv
 
 # 필수 패키지 설치
-pip install flask pandas scikit-learn openpyxl torch transformers langchain langchain-community chromadb sentence-transformers
+pip install flask pandas scikit-learn openpyxl
 
 # cuda 13.0d으로 설치
 pip3 install torch torchvision --index-url https://download.pytorch.org/whl/cu130
 
+# LLM 모델 패키지 설치
 pip install transformers accelerate bitsandbytes sentence-transformers langchain-huggingface langchain-community langchain-text-splitters pypdf chromadb nvitop
 ```
 *참고: `LLM.py` 내의 `HUGGINGFACEHUB_API_TOKEN` 설정이 필요할 수 있습니다.*
