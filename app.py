@@ -1,6 +1,7 @@
 import os
 import pandas as pd
 from flask import Flask, send_from_directory, render_template, request, jsonify
+from LLM import rag_chain
 
 # static_folder를 프론트엔드 빌드 결과물 폴더인 'templates/dist'로 지정합니다.
 app = Flask(__name__, static_folder='templates/dist')
@@ -54,6 +55,25 @@ def classify():
 
     # JSON 형태로 예측 결과 반환
     return jsonify({'result': str(predictions[0])})
+
+@app.route('/classify_llm', methods=['POST'])
+def classify_llm():
+    # 클라이언트로부터 데이터 받기
+    data_from_client = request.get_json()
+    my_test_data = data_from_client.get('my_test_data')
+
+    # LLM을 사용하여 분류
+    query = f"{my_test_data}의 category는 무엇인가요?"
+    result = rag_chain.invoke(query)
+
+    # 결과에서 "Assistant:" 이후의 텍스트만 추출
+    if "Assistant:" in result:
+        answer = result.split("Assistant:", 1)[-1].strip()
+    else:
+        answer = result.strip()
+
+    # JSON 형태로 예측 결과 반환
+    return jsonify({'result': answer})
 
 if __name__ == '__main__':
     app.run()

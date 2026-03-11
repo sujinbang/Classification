@@ -21,7 +21,7 @@ export default function App() {
     if (!inputValue.trim()) return;
 
     try {
-      const response = await fetch('/classify', {
+      const response = await fetch('/classify_llm', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
